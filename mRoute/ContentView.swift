@@ -69,7 +69,8 @@ struct ContentView: View {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
                     ForEach(items, id: \.self) { item in
-                        NavigationLink(destination: mWebView(item: item)) {
+                        NavigationLink(destination: mWebView2()) {
+//                            mWebView(item: item)
                             VStack {
                                 AsyncImage(url: URL(string: item.icon)) { image in
                                     image
