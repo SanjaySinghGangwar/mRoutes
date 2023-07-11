@@ -6,76 +6,97 @@
 //
 
 import SwiftUI
+import UIKit
 import WebKit
 
-
-struct mWebView: UIViewRepresentable {
-    let item: Item
-    @State private var isLoading = true
-
-    func makeUIView(context: Context) -> UIView {
-        let containerView = UIView()
-        let webView = WKWebView()
-        let activityIndicator = UIActivityIndicatorView(style: .large)
-        
-        // Add the web view and activity indicator to the container view
-        containerView.addSubview(webView)
-        containerView.addSubview(activityIndicator)
-        
-        // Set up constraints for the web view and activity indicator
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            webView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            webView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            webView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            webView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
-        ])
-        
-        // Start the loading indicator animation
-        if(isLoading){
-            print("Loader Started")
-            activityIndicator.startAnimating()
-        }else{
-            print("Loader Stopped")
-            activityIndicator.stopAnimating()
+struct mWebView: View {
+    @ObservedObject var model: WebViewModel
+    
+    var body: some View {
+        LoadingView(isShowing: self.$model.isLoading) {
+            WebView(viewModel: self.model)
         }
-      
-        
-        // Load the web page
-        let request = URLRequest(url: URL(string: item.link)!)
-        webView.load(request)
-        
-        // Monitor the web view's loading state
-        webView.navigationDelegate = context.coordinator
-        
-        return containerView
+    }
+}
+
+struct ActivityIndicatorView: UIViewRepresentable {
+    @Binding var isAnimating: Bool
+    let style: UIActivityIndicatorView.Style
+    
+    func makeUIView(context: UIViewRepresentableContext<ActivityIndicatorView>) -> UIActivityIndicatorView {
+        return UIActivityIndicatorView(style: style)
     }
     
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // Not needed for this example
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicatorView>) {
+        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
     }
+}
+
+struct LoadingView<Content>: View where Content: View {
+    @Binding var isShowing: Bool
+    var content: () -> Content
     
-    // Coordinator to monitor web view's loading state
+    var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .center) {
+                self.content()
+                    .disabled(self.isShowing)
+                    .blur(radius: self.isShowing ? 1 : 0)
+                
+                VStack {
+                    Text("Loading...")
+                    ActivityIndicatorView(isAnimating: .constant(true), style: .large)
+                }
+                .frame(width: geometry.size.width / 2, height: geometry.size.height / 5)
+                .background(Color.secondary.colorInvert())
+                .foregroundColor(Color.red)
+                .cornerRadius(20)
+                .opacity(self.isShowing ? 1 : 0)
+                
+            }
+        }
+    }
+}
+
+
+class WebViewModel: ObservableObject {
+    @Published var url: String
+    @Published var isLoading: Bool = true
+    
+    init (url: String) {
+        self.url = url
+    }
+}
+
+struct WebView: UIViewRepresentable {
+    @ObservedObject var viewModel: WebViewModel
+    let webView = WKWebView()
+    
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(self.viewModel)
     }
     
     class Coordinator: NSObject, WKNavigationDelegate {
-        let parent: mWebView
+        private var viewModel: WebViewModel
         
-        init(_ parent: mWebView) {
-            self.parent = parent
+        init(_ viewModel: WebViewModel) {
+            self.viewModel = viewModel
         }
         
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            // Stop the loading indicator animation
-            parent.isLoading = false
-            
-            // Print something to confirm that the loader has stopped
-            print("Loader has stopped")
+            self.viewModel.isLoading = false
         }
+    }
+    
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<WebView>) { }
+    
+    func makeUIView(context: Context) -> UIView {
+        self.webView.navigationDelegate = context.coordinator
+        
+        if let url = URL(string: self.viewModel.url) {
+            self.webView.load(URLRequest(url: url))
+        }
+        
+        return self.webView
     }
 }

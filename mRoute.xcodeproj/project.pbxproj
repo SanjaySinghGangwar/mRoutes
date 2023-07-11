@@ -11,8 +11,8 @@
 		18B8E5DD2A5D6CC3008D56E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8E5DC2A5D6CC3008D56E0 /* ContentView.swift */; };
 		18B8E5DF2A5D6CC4008D56E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18B8E5DE2A5D6CC4008D56E0 /* Assets.xcassets */; };
 		18B8E5E32A5D6CC4008D56E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18B8E5E22A5D6CC4008D56E0 /* Preview Assets.xcassets */; };
-		18B8E5EA2A5D7455008D56E0 /* mWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8E5E92A5D7455008D56E0 /* mWebView.swift */; };
-		18E337882A5D95770073D232 /* mWebView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E337872A5D95770073D232 /* mWebView2.swift */; };
+		18E337882A5D95770073D232 /* mWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E337872A5D95770073D232 /* mWebView.swift */; };
+		926956D52A5DAD30006E27E2 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926956D42A5DAD30006E27E2 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +22,8 @@
 		18B8E5DE2A5D6CC4008D56E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18B8E5E02A5D6CC4008D56E0 /* mRoute.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mRoute.entitlements; sourceTree = "<group>"; };
 		18B8E5E22A5D6CC4008D56E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		18B8E5E92A5D7455008D56E0 /* mWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mWebView.swift; sourceTree = "<group>"; };
-		18E337872A5D95770073D232 /* mWebView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mWebView2.swift; sourceTree = "<group>"; };
+		18E337872A5D95770073D232 /* mWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mWebView.swift; sourceTree = "<group>"; };
+		926956D42A5DAD30006E27E2 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +56,13 @@
 		18B8E5D92A5D6CC3008D56E0 /* mRoute */ = {
 			isa = PBXGroup;
 			children = (
+				18E337872A5D95770073D232 /* mWebView.swift */,
+				926956D42A5DAD30006E27E2 /* Item.swift */,
 				18B8E5DA2A5D6CC3008D56E0 /* mRouteApp.swift */,
 				18B8E5DC2A5D6CC3008D56E0 /* ContentView.swift */,
 				18B8E5DE2A5D6CC4008D56E0 /* Assets.xcassets */,
 				18B8E5E02A5D6CC4008D56E0 /* mRoute.entitlements */,
 				18B8E5E12A5D6CC4008D56E0 /* Preview Content */,
-				18B8E5E92A5D7455008D56E0 /* mWebView.swift */,
-				18E337872A5D95770073D232 /* mWebView2.swift */,
 			);
 			path = mRoute;
 			sourceTree = "<group>";
@@ -145,10 +145,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				926956D52A5DAD30006E27E2 /* Item.swift in Sources */,
 				18B8E5DD2A5D6CC3008D56E0 /* ContentView.swift in Sources */,
 				18B8E5DB2A5D6CC3008D56E0 /* mRouteApp.swift in Sources */,
-				18E337882A5D95770073D232 /* mWebView2.swift in Sources */,
-				18B8E5EA2A5D7455008D56E0 /* mWebView.swift in Sources */,
+				18E337882A5D95770073D232 /* mWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +269,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = mRoute/mRoute.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -283,11 +284,12 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -307,6 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = mRoute/mRoute.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -321,11 +324,12 @@
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
