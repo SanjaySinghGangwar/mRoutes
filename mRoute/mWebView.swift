@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 struct mWebView: View {
+    
     @ObservedObject var model: WebViewModel
     
     var body: some View {
